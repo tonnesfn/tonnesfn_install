@@ -83,6 +83,8 @@ sudo apt-get install dialog
     
     sudo -H -u $SUDO_USER bash -c 'mkdir -p ~/catkin_ws/src && source /opt/ros/melodic/setup.bash  && cd ~/catkin_ws && catkin build' 
     echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+
+    adduser $USER dialout
   ;;
 
   5) # GVIM
@@ -96,6 +98,8 @@ sudo apt-get install dialog
     sudo -H -u $SUDO_USER bash -c 'cd ~/catkin_ws/src && git clone git@github.uio.no:robin/dyret_hardware.git'
     sudo -H -u $SUDO_USER bash -c 'cd ~/catkin_ws/src && git clone git@github.uio.no:tonnesfn/tonnesfn_experiments.git'
     sudo -H -u $SUDO_USER bash -c 'cd ~/catkin_ws/src && git clone git@github.uio.no:robin/dyret_simulation.git'
+    sudo -H -u $SUDO_USER bash -c 'cd ~/catkin_ws/src && git clone https://github.com/ros-drivers/rosserial.git'
+    sudo -H -u $SUDO_USER bash -c 'cd ~/catkin_ws/src && git clone https://github.com/ethz-asl/ethzasl_xsens_driver.git'
 
   ;;
 
