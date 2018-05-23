@@ -28,6 +28,10 @@ sudo apt-get install dialog
     snap install slack --classic
     echo "Installing Terminator"
     apt-get install terminator -y
+    echo "Installing htop"
+    apt-get install htop -y
+    echo "Installing tree"
+    apt-get install tree -y
   ;;
 
   2) # Install Git++
