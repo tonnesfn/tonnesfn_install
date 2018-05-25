@@ -14,7 +14,10 @@ sudo apt-get install dialog
            3 "Chrome" off
            4 "ROS" off
            5 "GVIM" off
-           6 "Get DyRET code" off)
+           6 "Get DyRET code" off
+           7 "Nvidia drivers" off
+	   8 "Cuda 9.0" off
+           9 "Clion" off)
   choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
   clear
   for choice in $choices
@@ -25,7 +28,7 @@ sudo apt-get install dialog
     echo "Installing VLC"
     apt-get install vlc -y
     echo "Installing Slack"
-    snap install slack --classic
+    snap install slack --classic --stable
     echo "Installing Terminator"
     apt-get install terminator -y
     echo "Installing htop"
@@ -75,6 +78,7 @@ sudo apt-get install dialog
     apt-get install ros-melodic-desktop-full -y
     rosdep init
     rosdep update
+    sudo -H -u $SUDO_USER bash -c 'sudo rosdep fix-permissions' 
     apt-get install python-rosinstall python-rosinstall-generator python-wstool build-essential -y
 
     wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
@@ -84,7 +88,7 @@ sudo apt-get install dialog
     sudo -H -u $SUDO_USER bash -c 'mkdir -p ~/catkin_ws/src && source /opt/ros/melodic/setup.bash  && cd ~/catkin_ws && catkin build' 
     echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
-    adduser $USER dialout
+    sudo -H -u $SUDO_USER bash -c 'adduser $USER dialout'
   ;;
 
   5) # GVIM
@@ -101,6 +105,22 @@ sudo apt-get install dialog
     sudo -H -u $SUDO_USER bash -c 'cd ~/catkin_ws/src && git clone https://github.com/ros-drivers/rosserial.git'
     sudo -H -u $SUDO_USER bash -c 'cd ~/catkin_ws/src && git clone https://github.com/ethz-asl/ethzasl_xsens_driver.git'
 
+  ;;
+
+  7) # Nvidia drivers
+    ubuntu-drivers devices
+    ubuntu-drivers autoinstall
+  ;;
+
+  8) # Cuda 9.0
+    wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.0.176_384.81_linux-run -nc
+    chmod +x cuda_9.0.176_384.81_linux-run
+    ./cuda_9.0.176_384.81_linux-run --override
+  ;;
+
+  9) # CLion
+    snap install clion --classic --stable
+    sudo -H -u $SUDO_USER bash -c 'desktop/clion.desktop ~/.local/share/applications/'
   ;;
 
   esac
