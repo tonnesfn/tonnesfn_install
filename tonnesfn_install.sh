@@ -39,7 +39,8 @@ sudo apt-get install dialog
     echo "Install dropbox"
     apt-get install nautilus-dropbox -y
     sudo -H -u $SUDO_USER bash -c 'dropbox start -i'
-
+    echo "Install gnome-open"
+    apt-get install libgnome2-bin -y
   ;;
 
   2) # Install Git++
