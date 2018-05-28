@@ -17,7 +17,8 @@ sudo apt-get install dialog
            6 "Get DyRET code" off
            7 "Nvidia drivers" off
 	   8 "Cuda 9.0" off
-           9 "Clion" off)
+           9 "Clion" off
+	   10 "Dropbox" off)
   choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
   clear
   for choice in $choices
@@ -121,6 +122,11 @@ sudo apt-get install dialog
   9) # CLion
     snap install clion --classic --stable
     sudo -H -u $SUDO_USER bash -c 'desktop/clion.desktop ~/.local/share/applications/'
+  ;;
+
+  10) # Dropbox
+    sudo -H -u $SUDO_USER bash -c 'cd ~ && pwd && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -'
+    sudo -H -u $SUDO_USER bash -c '~/.dropbox-dist/dropboxd'
   ;;
 
   esac
