@@ -18,7 +18,7 @@ sudo apt-get install dialog
            7 "Nvidia drivers" off
 	   8 "Cuda 9.0" off
            9 "Clion" off
-	   10 "Dropbox" off)
+	   11 "Arduino 1.8.5" off)
   choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
   clear
   for choice in $choices
@@ -36,6 +36,10 @@ sudo apt-get install dialog
     apt-get install htop -y
     echo "Installing tree"
     apt-get install tree -y
+    echo "Install dropbox"
+    apt-get install nautilus-dropbox -y
+    sudo -H -u $SUDO_USER bash -c 'dropbox start -i'
+
   ;;
 
   2) # Install Git++
@@ -124,9 +128,10 @@ sudo apt-get install dialog
     sudo -H -u $SUDO_USER bash -c 'desktop/clion.desktop ~/.local/share/applications/'
   ;;
 
-  10) # Dropbox
-    sudo -H -u $SUDO_USER bash -c 'cd ~ && pwd && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -'
-    sudo -H -u $SUDO_USER bash -c '~/.dropbox-dist/dropboxd'
+  11) # Arduino
+    sudo -H -u $SUDO_USER bash -c 'cd ~ && wget "https://downloads.arduino.cc/arduino-1.8.5-linux64.tar.xz" -nc && tar xf arduino-1.8.5-linux64.tar.xz && rm arduino-1.8.5-linux64.tar.xz'
+    echo fs.inotify.max_user_watches=100000 | tee -a /etc/sysctl.conf
+    sysctl -p
   ;;
 
   esac
