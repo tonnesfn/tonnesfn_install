@@ -6,6 +6,7 @@ if [[ $EUID -ne 0 ]]; then
 else
   echo "Updating and Upgrading"
   apt-get update && sudo apt-get upgrade -y
+  snap refresh
 
 sudo apt-get install dialog
   cmd=(dialog --separate-output --checklist "Please Select Software you want to install:" 22 76 16)
