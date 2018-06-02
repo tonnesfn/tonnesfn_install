@@ -42,6 +42,8 @@ sudo apt-get install dialog
     sudo -H -u $SUDO_USER bash -c 'dropbox start -i'
     echo "Install gnome-open"
     apt-get install libgnome2-bin -y
+    echo "Install spotify"
+    snap install spotify --classic --stable
   ;;
 
   2) # Install Git++
