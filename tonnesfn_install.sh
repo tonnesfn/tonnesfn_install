@@ -44,6 +44,8 @@ sudo apt-get install dialog
     apt-get install libgnome2-bin -y
     echo "Install spotify"
     snap install spotify --classic --stable
+    echo "Install kazam"
+    apt-get install kazam -y
   ;;
 
   2) # Install Git++
