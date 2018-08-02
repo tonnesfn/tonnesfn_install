@@ -19,7 +19,8 @@ sudo apt-get install dialog
            7 "Nvidia drivers" off
 	   8 "Cuda 9.0" off
            9 "Clion" off
-	   11 "Arduino 1.8.5" off)
+	   11 "Arduino 1.8.5" off
+	   12 "Python++" off)
   choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
   clear
   for choice in $choices
@@ -138,6 +139,16 @@ sudo apt-get install dialog
     sudo -H -u $SUDO_USER bash -c 'cd ~ && wget "https://downloads.arduino.cc/arduino-1.8.5-linux64.tar.xz" -nc && tar xf arduino-1.8.5-linux64.tar.xz && rm arduino-1.8.5-linux64.tar.xz'
     echo fs.inotify.max_user_watches=100000 | tee -a /etc/sysctl.conf
     sysctl -p
+  ;;
+
+  12) # Python++
+    apt-get install python3 -y
+    apt-get install python3-pip -y
+    apt-get install jupyter-notebook
+    pip3 install jupyter
+    pip3 install matplotlib
+    pip3 install pandas
+    pip3 install seaborn
   ;;
 
   esac
